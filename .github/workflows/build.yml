@@ -23,7 +23,7 @@ on:
           - debug
 
 env:
-  IMAGE_NAME: docker-ubuntu2204-ansible
+  IMAGE_NAME: docker-debian11-ansible
 
 jobs:
   build-and-push:
