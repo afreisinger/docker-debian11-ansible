@@ -1,9 +1,9 @@
-FROM debian:bookworm
+FROM debian:bullseye
 LABEL maintainer="Adrian Freisinger"
 
 ARG DEBIAN_FRONTEND=noninteractive
 ENV LANG=en_US.UTF-8
-ENV pip_packages="ansible"
+ENV pip_packages="ansible cryptography"
 
 # Install dependencies.
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -23,6 +23,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
        systemd-cron \
        sudo \
        iproute2 \
+       dbus \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /usr/share/doc /usr/share/man
 
@@ -33,7 +34,7 @@ RUN sed -i 's/^\($ModLoad imklog\)/#\1/' /etc/rsyslog.conf
 RUN locale-gen en_US.UTF-8
 
 # Install Ansible via Pip.
-RUN pip3 install --no-cache-dir $pip_packages
+RUN pip3 install $pip_packages
 
 # Install Ansible inventory file.
 COPY initctl-shim /initctl-shim
