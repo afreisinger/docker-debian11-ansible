@@ -24,6 +24,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
        sudo \
        iproute2 \
        dbus \
+       curl \
+       wget \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /usr/share/doc /usr/share/man
 
